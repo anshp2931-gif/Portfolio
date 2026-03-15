@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { Menu, X, Settings } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import userLogo from '../assets/logo.png';
 
 const Navigation = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -50,10 +51,26 @@ const Navigation = () => {
                 {/* Logo */}
                 <motion.a
                     href="#"
-                    className={`text-xl font-black tracking-tighter uppercase ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}
+                    className="group relative flex items-center justify-center gap-3"
                     whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                 >
-                    A P
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-electric-cyan/30 shadow-[0_0_15px_rgba(0,255,255,0.2)] group-hover:border-purple-500/50 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-300">
+                        <img 
+                            src={userLogo} 
+                            alt="AP Logo" 
+                            className="w-full h-full object-contain scale-110 group-hover:scale-125 transition-transform duration-500"
+                            onError={(e) => {
+                                e.target.onerror = null; 
+                                e.target.src = 'https://via.placeholder.com/150/000000/00FFFF?text=AP'; 
+                            }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-electric-cyan/10 to-purple-500/10 mix-blend-overlay"></div>
+                    </div>
+                    
+                    <span className={`text-xl font-bold tracking-tight hidden sm:block ${theme === 'light' ? 'text-gray-800' : 'text-gray-100'}`}>
+                        Ansh <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-cyan to-purple-500">Patel</span>
+                    </span>
                 </motion.a>
 
                 {/* Desktop Navigation */}

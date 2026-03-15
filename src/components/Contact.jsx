@@ -8,11 +8,14 @@ const Contact = () => {
         email: '',
         message: '',
     });
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle form submission
-        console.log('Form submitted:', formData);
+        setIsSubmitted(true);
+        setTimeout(() => setIsSubmitted(false), 5000);
+        setFormData({ name: '', email: '', message: '' });
     };
 
     const handleChange = (e) => {
@@ -138,12 +141,29 @@ const Contact = () => {
 
                             <motion.button
                                 type="submit"
-                                className="w-full px-6 py-4 bg-electric-cyan/10 hover:bg-electric-cyan/20 rounded-xl font-bold border border-electric-cyan/30 flex items-center justify-center gap-2 transition-all text-primary"
-                                whileHover={{ scale: 1.02, y: -2 }}
-                                whileTap={{ scale: 0.98 }}
+                                disabled={isSubmitted}
+                                className={`w-full px-6 py-4 rounded-xl font-bold border flex items-center justify-center gap-2 transition-all ${
+                                    isSubmitted 
+                                    ? 'bg-green-500/20 border-green-500/50 text-green-500' 
+                                    : 'bg-electric-cyan/10 hover:bg-electric-cyan/20 border-electric-cyan/30 text-primary'
+                                }`}
+                                whileHover={!isSubmitted ? { scale: 1.02, y: -2 } : {}}
+                                whileTap={!isSubmitted ? { scale: 0.98 } : {}}
                             >
-                                <Send className="w-5 h-5" />
-                                Send Message
+                                {isSubmitted ? (
+                                    <motion.span
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        className="flex items-center gap-2"
+                                    >
+                                        Message Sent!
+                                    </motion.span>
+                                ) : (
+                                    <>
+                                        <Send className="w-5 h-5" />
+                                        Send Message
+                                    </>
+                                )}
                             </motion.button>
                         </form>
                     </motion.div>

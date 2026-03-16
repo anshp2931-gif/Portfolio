@@ -44,7 +44,7 @@ function App() {
         <Projects />
         <Skills />
         <Certificates />
-      
+        
         <Contact />
       </main>
 

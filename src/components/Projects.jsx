@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 
 const projects = [
@@ -54,116 +53,52 @@ const projects = [
     githubUrl: "https://github.com/anshp2931-gif/Sony-clone-website",
     ytURL: "https://youtu.be/Vry4GFfK7-s",
   },
+  {
+    title: "Rare Planet Clone",
+    description: "A stylish and explore beautiful greenery online.",
+    tags: ["HTML", "CSS", "Responsive Design"],
+    image: "https://venturegarage.in/wp-content/uploads/2022/02/rareplanet.jpg",
+    liveUrl: "https://rareplanet-website.netlify.app/",
+    githubUrl: "https://github.com/anshp2931-gif/rareplant-clone-website",
+    ytURL: "https://youtu.be/ksAjTkGOO7Y?si=UD7m8hU0quiWQ7D6",
+  },
 ];
 
 const Projects = () => {
-
-  const containerRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-  });
-
   return (
     <section
       id="projects"
-      ref={containerRef}
-      className="relative h-[400vh] bg-black light:bg-slate-50"
+      className="bg-black light:bg-slate-50 py-20 px-6 md:px-20"
     >
+      {/* Title */}
+      <div className="text-center mb-16">
+        <p className="text-cyan-400 text-sm tracking-[0.3em] uppercase">
+          MY WORK
+        </p>
 
-      <div className="sticky top-0 h-screen overflow-hidden">
+        <h2 className="text-4xl md:text-6xl font-bold text-white light:text-slate-900 mt-3">
+          Projects
+        </h2>
+      </div>
 
-        {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="absolute top-20 w-full text-center z-20"
-        >
-          <p className="text-cyan-400 text-sm tracking-[0.3em] uppercase">
-            MY WORK
-          </p>
-
-          <h2 className="text-5xl md:text-7xl font-bold text-white light:text-slate-900 mt-3">
-            Projects
-          </h2>
-        </motion.div>
-
-        {/* Cards Container */}
-        <div className="relative w-full h-full flex items-center justify-center pt-40 [perspective:1200px]">
-
-          {projects.map((project, index) => (
-            <ProjectLayer
-              key={index}
-              project={project}
-              index={index}
-              progress={smoothProgress}
-              total={projects.length}
-            />
-          ))}
-
-        </div>
-
+      {/* Grid */}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              delay: index * 0.1,
+            }}
+            viewport={{ once: true }}
+          >
+            <ProjectCard {...project} index={index} />
+          </motion.div>
+        ))}
       </div>
     </section>
-  );
-};
-
-const ProjectLayer = ({ project, index, progress, total }) => {
-
-  const start = index / total;
-  const end = (index + 1) / total;
-
-  const y = useTransform(
-    progress,
-    [start - 0.2, start, end, end + 0.2],
-    [250, 0, -200, -400]
-  );
-
-  const scale = useTransform(
-    progress,
-    [start - 0.2, start, end],
-    [0.7, 1, 0.85]
-  );
-
-  const opacity = useTransform(
-    progress,
-    [start - 0.15, start, end - 0.05, end],
-    [0, 1, 1, 0]
-  );
-
-  const rotateX = useTransform(
-    progress,
-    [start - 0.2, start, end],
-    [25, 0, -10]
-  );
-
-  const pointerEvents = useTransform(
-    opacity,
-    (v) => (v > 0.5 ? "auto" : "none")
-  );
-
-  return (
-    <motion.div
-      style={{ y, scale, opacity, rotateX, pointerEvents }}
-      className="absolute w-full px-10 md:px-20 lg:px-32"
-    >
-
-      {/* Project Number */}
-      <div className="mb-4 text-cyan-400 light:text-indigo-600 text-lg font-semibold">
-        {String(index + 1).padStart(2, "0")}
-      </div>
-
-      <ProjectCard {...project} index={index} />
-
-    </motion.div>
   );
 };
 

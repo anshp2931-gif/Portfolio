@@ -32,10 +32,12 @@ const Navigation = () => {
 
     const navItems = [
         { label: 'About', href: '#about' },
-        { label: 'Skills', href: '#skills' },
-        { label: 'Certificates', href: '#certificates' },
-        { label: 'Projects', href: '#projects' },
         { label: 'Education', href: '#education' },
+        { label: 'Skills', href: '#skills' },
+        { label: 'Projects', href: '#projects' },
+        { label: 'GitHub', href: '#github' },
+        { label: 'Hackathons', href: '#hackathons' },
+        { label: 'Certificates', href: '#certificates' },
         { label: 'Contact', href: '#contact' },
     ];
 

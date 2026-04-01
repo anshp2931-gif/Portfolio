@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Trophy, Code, Calendar, Zap, Github, ExternalLink } from 'lucide-react';
 import KalixLogo from '../assets/kalix.png';
-import PlantPalLogo from '../assets/PlantPal.png'
+import PlantPalLogo from '../assets/Plantpal.png'
 
 const Hackathon = () => {
     const hackathons = [

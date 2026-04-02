@@ -72,9 +72,7 @@ const Certificates = () => {
 
         {/* Title */}
         <div className="text-center mb-16">
-          <p className="text-cyan-400 light:text-indigo-600 tracking-[0.3em] text-sm mb-3">
-            VALIDATED SKILLS
-          </p>
+          
 
           <h2 className="text-5xl md:text-7xl font-bold text-white light:text-slate-900">
             Certifications
